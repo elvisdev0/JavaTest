@@ -299,4 +299,50 @@ BUSCAR
 
 
   # VISTA
+
+  # CALCULO
+
+                       private void btn_guardarActionPerformed(java.awt.event.ActionEvent evt) {                                            
+        
+        if (Integer.parseInt(txt_consumido.getText())>5) {
+            
+             
+        int con = Integer.parseInt(txt_codigo_contra.getText());
+        int cons = Integer.parseInt(txt_consumido.getText());
+        int emple = combo_empleado.getSelectedIndex()+1;
+        String fecha = ((JTextField)Jdate_lectura.getDateEditor().getUiComponent()).getText();       
+        int mes = combo_mes.getSelectedIndex()+1;
+        String tipo = txt_tipo.getText();
+           
+        double total = 0;
+       
+            if (cons<=30 && "RESIDENCIAL".equals(tipo)) {
+               total = cons*0.63;
+            }else if (cons<=30 && "COMERCIAL".equals(tipo)) {
+                total = cons*0.96;
+            }else if (cons>30 && cons<=150 && "RESIDENCIAL".equals(tipo)) {
+                total = cons*0.90;
+            }else if (cons>30 && cons<=150 && "COMERCIAL".equals(tipo)) {
+                total = cons*0.99;
+            }else if (cons>150 && cons<=300 && "RESIDENCIAL".equals(tipo)) {
+                total = cons*1.02;
+            }else if (cons>150 && cons<=300 && "COMERCIAL".equals(tipo)) {
+                total = cons*1.12;
+            }else if (cons>300 && cons<=1000 && "RESIDENCIAL".equals(tipo)) {
+                total = cons*1.28;
+            }else if (cons>300 && cons<=1000 && "COMERCIAL".equals(tipo)) {
+                total = cons*1.46;
+            }else if (cons>1000 && "RESIDENCIAL".equals(tipo)) {
+                total = cons*1.35;
+            }else if (cons>1000 && "COMERCIAL".equals(tipo)) {
+                total = cons*1.54;
+            }
+        
+        rf.insertar_datos(con, cons, emple, Date.valueOf(fecha), mes,total);
+        }else{
+            JOptionPane.showMessageDialog(null, "CONSUMIDO DEBE SER MAYOR A 5");
+        }
+         
+
+
   
